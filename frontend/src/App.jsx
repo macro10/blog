@@ -48,6 +48,10 @@ const App = () => {
       setUser(user)
       setUsername('')
       setPassword('')
+
+      const blogs = await blogService.getAll()
+      setBlogs(blogs)
+
     } catch (exception) {
       setErrorMessage('Wrong credentials')
       setTimeout(() => {
