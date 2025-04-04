@@ -27,7 +27,7 @@ blogsRouter.post('/', async (request, response) => {
       error: 'title or url missing'
     })
   }
-  
+
   const blog = new Blog({
     title: body.title,
     author: body.author,
