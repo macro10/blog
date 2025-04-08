@@ -5,14 +5,6 @@ import { useState } from 'react'
 const Blog = ({ blog, updateBlog, deleteBlog, user }) => {
   const [visible, setVisible] = useState(false)
 
-  const blogStyle = {
-    paddingTop: 10,
-    paddingLeft: 2,
-    border: 'solid',
-    borderWidth: 1,
-    marginBottom: 5
-  }
-
   const toggleVisibility = () => {
     setVisible(!visible)
   }
@@ -31,24 +23,26 @@ const Blog = ({ blog, updateBlog, deleteBlog, user }) => {
   }
 
   return (
-    <div style={blogStyle} className="blog">
+    <div className="blog">
       <div className="blog-basic">
-        {blog.title} {blog.author}
-        <button onClick={toggleVisibility}>
-          {visible ? 'hide' : 'view'}
+        <span>{blog.title} - <span className="author">{blog.author}</span></span>
+        <button className="small secondary" onClick={toggleVisibility}>
+          {visible ? 'Hide' : 'View'}
         </button>
       </div>
       {visible && (
         <div className="blog-details">
-          <div>{blog.url}</div>
-          <div>
-            likes {blog.likes}
-            <button onClick={handleLike}>like</button>
+          <div className="url">{blog.url}</div>
+          <div className="likes-container">
+            <span>likes {blog.likes}</span>
+            <button className="small" onClick={handleLike}>Like</button>
           </div>
           <div>{blog.user?.name}</div>
-          {showDeleteButton() && (
-            <button onClick={() => deleteBlog(blog)}>delete</button>
-          )}
+          <div className="blog-actions">
+            {showDeleteButton() && (
+              <button className="small danger" onClick={() => deleteBlog(blog)}>Delete</button>
+            )}
+          </div>
         </div>
       )}
     </div>

@@ -8,11 +8,13 @@ const LoginForm = ({
   password
 }) => {
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <div>
-          username
+    <div className="login-container">
+      <h2 className="login-title">Log in to application</h2>
+      <form onSubmit={handleSubmit} className="login-form">
+        <div className="form-group">
+          <label className="form-label" htmlFor="username">Username</label>
           <input
+            id="username"
             data-testid='username'
             type="text"
             value={username}
@@ -20,9 +22,10 @@ const LoginForm = ({
             onChange={handleUsernameChange}
           />
         </div>
-        <div>
-          password
+        <div className="form-group">
+          <label className="form-label" htmlFor="password">Password</label>
           <input
+            id="password"
             data-testid='password'
             type="password"
             value={password}
@@ -30,7 +33,7 @@ const LoginForm = ({
             onChange={handlePasswordChange}
           />
         </div>
-        <button type="submit">login</button>
+        <button type="submit">Login</button>
       </form>
     </div>
   )

@@ -11,6 +11,7 @@ const App = () => {
   const [blogs, setBlogs] = useState([])
 
   const [errorMessage, setErrorMessage] = useState(null)
+  const [notificationType, setNotificationType] = useState('error')
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
@@ -28,7 +29,7 @@ const App = () => {
 
   useEffect(() => {
     blogService.getAll().then(blogs =>
-      setBlogs( blogs )
+      setBlogs(blogs)
     )
   }, [])
 
@@ -51,9 +52,16 @@ const App = () => {
 
       const blogs = await blogService.getAll()
       setBlogs(blogs)
+      
+      setNotificationType('success')
+      setErrorMessage(`Welcome ${user.name}!`)
+      setTimeout(() => {
+        setErrorMessage(null)
+      }, 5000)
 
     } catch (exception) {
-      setErrorMessage('Wrong credentials')
+      setNotificationType('error')
+      setErrorMessage('Wrong username or password')
       setTimeout(() => {
         setErrorMessage(null)
       }, 5000)
@@ -73,7 +81,8 @@ const App = () => {
         setBlogs(blogs.concat(returnedBlog))
       })
 
-    setErrorMessage(`a new blog ${blogObject.title} by ${blogObject.author} added`)
+    setNotificationType('success')
+    setErrorMessage(`A new blog "${blogObject.title}" by ${blogObject.author} added`)
     setTimeout(() => {
       setErrorMessage(null)
     }, 5000)
@@ -84,12 +93,15 @@ const App = () => {
       if (window.confirm(`Remove blog ${blogToDelete.title} by ${blogToDelete.author}`)) {
         await blogService.remove(blogToDelete.id)
         setBlogs(blogs.filter(blog => blog.id !== blogToDelete.id))
-        setErrorMessage(`Deleted ${blogToDelete.title}`)
+        
+        setNotificationType('success')
+        setErrorMessage(`Deleted "${blogToDelete.title}"`)
         setTimeout(() => {
           setErrorMessage(null)
         }, 5000)
       }
     } catch (exception) {
+      setNotificationType('error')
       setErrorMessage('Error deleting blog')
       setTimeout(() => {
         setErrorMessage(null)
@@ -103,7 +115,14 @@ const App = () => {
       setBlogs(blogs.map(blog =>
         blog.id === updatedBlog.id ? updatedBlog : blog
       ))
+      
+      setNotificationType('success')
+      setErrorMessage(`Liked "${updatedBlog.title}"`)
+      setTimeout(() => {
+        setErrorMessage(null)
+      }, 5000)
     } catch (exception) {
+      setNotificationType('error')
       setErrorMessage('Error updating blog')
       setTimeout(() => {
         setErrorMessage(null)
@@ -116,37 +135,10 @@ const App = () => {
     setUser(null)
   }
 
-  const loginForm = () => (
-    <div>
-      <form onSubmit={handleLogin}>
-        <div>
-          username
-          <input
-            type="text"
-            value={username}
-            name="Username"
-            onChange={({ target }) => setUsername(target.value)}
-          />
-        </div>
-        <div>
-          password
-          <input
-            type="password"
-            value={password}
-            name="Password"
-            onChange={({ target }) => setPassword(target.value)}
-          />
-        </div>
-        <button type="submit">login</button>
-      </form>
-    </div>
-  )
-
   if (user === null) {
     return (
       <div>
-        <h2>Log in to application</h2>
-        <Notification message={errorMessage} />
+        <Notification message={errorMessage} type={notificationType} />
         <LoginForm
           handleSubmit={handleLogin}
           handleUsernameChange={({ target }) => setUsername(target.value)}
@@ -158,38 +150,41 @@ const App = () => {
     )
   }
 
-  /*
-  if (!blogs || blogs.length === 0) {
-    return <div>Loading...</div>
-  }
-  */
-
   return (
-    <div>
-      <h2>blogs</h2>
-      <Notification message={errorMessage} />
-      {user.name} logged-in { }
-      <button onClick={handleLogout}>
-          logout
-      </button>
-      <Togglable buttonLabel="new blog" ref={blogFormRef}>
+    <div className="app-container">
+      <div className="header">
+        <h1>Blogs App</h1>
+        <div className="user-info">
+          <span>{user.name} logged in</span>
+          <button className="secondary" onClick={handleLogout}>
+            Logout
+          </button>
+        </div>
+      </div>
+      
+      <Notification message={errorMessage} type={notificationType} />
+      
+      <Togglable buttonLabel="Create new blog" ref={blogFormRef}>
         <BlogForm
           createBlog={addBlog}
         />
       </Togglable>
-      {!blogs ? (<div>Loading...</div>) : (
-        blogs
-          .sort((a, b) => b.likes - a.likes)
-          .map(blog =>
-            <Blog
-              key={blog.id}
-              blog={blog}
-              updateBlog={updateBlog}
-              deleteBlog={deleteBlog}
-              user={user}
-            />
-          )
-      )}
+      
+      <div className="blog-list">
+        {!blogs ? (<div>Loading...</div>) : (
+          blogs
+            .sort((a, b) => b.likes - a.likes)
+            .map(blog =>
+              <Blog
+                key={blog.id}
+                blog={blog}
+                updateBlog={updateBlog}
+                deleteBlog={deleteBlog}
+                user={user}
+              />
+            )
+        )}
+      </div>
     </div>
   )
 }
