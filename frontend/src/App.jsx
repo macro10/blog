@@ -6,6 +6,8 @@ import loginService from './services/login'
 import Togglable from './components/Togglable'
 import BlogForm from './components/BlogForm'
 import LoginForm from './components/LoginForm'
+import signUpService from './services/signup'
+import SignupForm from './components/SignupForm'
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
@@ -15,6 +17,8 @@ const App = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
+  const [name, setName] = useState('')
+  const[showSignup, setShowSignup] = useState(false)
 
   const blogFormRef = useRef()
 
@@ -52,7 +56,7 @@ const App = () => {
 
       const blogs = await blogService.getAll()
       setBlogs(blogs)
-      
+
       setNotificationType('success')
       setErrorMessage(`Welcome ${user.name}!`)
       setTimeout(() => {
@@ -93,7 +97,7 @@ const App = () => {
       if (window.confirm(`Remove blog ${blogToDelete.title} by ${blogToDelete.author}`)) {
         await blogService.remove(blogToDelete.id)
         setBlogs(blogs.filter(blog => blog.id !== blogToDelete.id))
-        
+
         setNotificationType('success')
         setErrorMessage(`Deleted "${blogToDelete.title}"`)
         setTimeout(() => {
@@ -115,7 +119,7 @@ const App = () => {
       setBlogs(blogs.map(blog =>
         blog.id === updatedBlog.id ? updatedBlog : blog
       ))
-      
+
       setNotificationType('success')
       setErrorMessage(`Liked "${updatedBlog.title}"`)
       setTimeout(() => {
@@ -135,17 +139,81 @@ const App = () => {
     setUser(null)
   }
 
+  const handleSignup = async (event) => {
+    event.preventDefault()
+    try {
+      await signUpService.signup({
+        username,
+        name,
+        password
+      })
+
+      const user = await loginService.login({
+        username,
+        password
+      })
+
+      window.localStorage.setItem(
+        'loggedBlogListUser', JSON.stringify(user)
+      )
+
+      blogService.setToken(user.token)
+      setUser(user)
+      setUsername('')
+      setName('')
+      setPassword('')
+
+      setNotificationType('success')
+      setErrorMessage(`Welcome ${user.name}! Your account has been created.`)
+      setTimeout(() => {
+        setErrorMessage(null)
+      }, 5000)
+    } catch (exception) {
+      setNotificationType('error')
+      setErrorMessage(exception.response?.data?.error || 'Error creating account')
+      setTimeout(() => {
+        setErrorMessage(null)
+      }, 5000)
+    }
+  }
+
   if (user === null) {
     return (
       <div>
         <Notification message={errorMessage} type={notificationType} />
-        <LoginForm
-          handleSubmit={handleLogin}
-          handleUsernameChange={({ target }) => setUsername(target.value)}
-          handlePasswordChange={({ target }) => setPassword(target.value)}
-          username={username}
-          password={password}
-        />
+        {showSignup ? (
+          <>
+            <SignupForm
+              handleSubmit={handleSignup}
+              handleUsernameChange={({ target }) => setUsername(target.value)}
+              handleNameChange={({ target }) => setName(target.value)}
+              handlePasswordChange={({ target }) => setPassword(target.value)}
+              username={username}
+              name={name}
+              password={password}
+            />
+            <div style={{ textAlign: 'center', marginTop: '1rem' }}>
+              <button className="secondary" onClick={() => setShowSignup(false)}>
+                Already have an account? Log in
+              </button>
+            </div>
+          </>
+        ) : (
+          <>
+            <LoginForm
+              handleSubmit={handleLogin}
+              handleUsernameChange={({ target }) => setUsername(target.value)}
+              handlePasswordChange={({ target }) => setPassword(target.value)}
+              username={username}
+              password={password}
+            />
+            <div style={{ textAlign: 'center', marginTop: '1rem' }}>
+              <button className="secondary" onClick={() => setShowSignup(true)}>
+                Don't have an account? Sign up
+              </button>
+            </div>
+          </>
+        )}
       </div>
     )
   }
@@ -161,15 +229,15 @@ const App = () => {
           </button>
         </div>
       </div>
-      
+
       <Notification message={errorMessage} type={notificationType} />
-      
+
       <Togglable buttonLabel="Create new blog" ref={blogFormRef}>
         <BlogForm
           createBlog={addBlog}
         />
       </Togglable>
-      
+
       <div className="blog-list">
         {!blogs ? (<div>Loading...</div>) : (
           blogs
