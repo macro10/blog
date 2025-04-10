@@ -25,19 +25,18 @@ const Blog = ({ blog, updateBlog, deleteBlog, user }) => {
   return (
     <div className="blog">
       <div className="blog-basic">
-        <span>{blog.title} - <span className="author">{blog.author}</span></span>
+        <span>{blog.title} - <span className="author">{blog.user?.name}</span></span>
         <button className="small secondary" onClick={toggleVisibility}>
           {visible ? 'Hide' : 'View'}
         </button>
       </div>
       {visible && (
         <div className="blog-details">
-          <div className="url">{blog.url}</div>
+          <div className="blog-content">{blog.content}</div>
           <div className="likes-container">
             <span>likes {blog.likes}</span>
             <button className="small" onClick={handleLike}>Like</button>
           </div>
-          <div>{blog.user?.name}</div>
           <div className="blog-actions">
             {showDeleteButton() && (
               <button className="small danger" onClick={() => deleteBlog(blog)}>Delete</button>
