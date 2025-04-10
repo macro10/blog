@@ -22,17 +22,16 @@ blogsRouter.post('/', async (request, response) => {
     return response.status(401).json({ error: 'token invalid' })
   }
 
-  if (!body.title || !body.url) {
+  if (!body.title || !body.content) {
     return response.status(400).json({
-      error: 'title or url missing'
+      error: 'title or content missing'
     })
   }
 
   const blog = new Blog({
     title: body.title,
-    author: body.author,
-    url: body.url,
-    likes: body.likes,
+    content: body.content,
+    likes: body.likes || 0,
     user: user.id
   })
 
@@ -68,8 +67,7 @@ blogsRouter.put('/:id', async (request, response, next) => {
 
   const blog = {
     title: body.title,
-    url: body.url,
-    author: body.author,
+    content: body.content,
     likes: body.likes,
     user: body.user
   }

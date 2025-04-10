@@ -86,7 +86,7 @@ const App = () => {
       })
 
     setNotificationType('success')
-    setErrorMessage(`A new blog "${blogObject.title}" by ${blogObject.author} added`)
+    setErrorMessage(`A new blog "${blogObject.title}" added`)
     setTimeout(() => {
       setErrorMessage(null)
     }, 5000)

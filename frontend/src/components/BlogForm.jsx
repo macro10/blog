@@ -2,20 +2,17 @@ import { useState } from 'react'
 
 const BlogForm = ({ createBlog }) => {
   const [newTitle, setNewTitle] = useState('')
-  const [newAuthor, setNewAuthor] = useState('')
-  const [newUrl, setNewUrl] = useState('')
+  const [newContent, setNewContent] = useState('')
 
   const addBlog = (event) => {
     event.preventDefault()
     createBlog({
       title: newTitle,
-      author: newAuthor,
-      url: newUrl,
+      content: newContent,
     })
 
     setNewTitle('')
-    setNewAuthor('')
-    setNewUrl('')
+    setNewContent('')
   }
 
   return (
@@ -33,23 +30,15 @@ const BlogForm = ({ createBlog }) => {
           />
         </div>
         <div className="form-group">
-          <label className="form-label" htmlFor="author">Author</label>
-          <input
-            id="author"
-            name="author"
-            value={newAuthor}
-            onChange={event => setNewAuthor(event.target.value)}
-            placeholder="Write author here"
-          />
-        </div>
-        <div className="form-group">
-          <label className="form-label" htmlFor="url">URL</label>
-          <input
-            id="url"
-            name="url"
-            value={newUrl}
-            onChange={event => setNewUrl(event.target.value)}
-            placeholder="Write URL here"
+          <label className="form-label" htmlFor="content">Content</label>
+          <textarea
+            id="content"
+            name="content"
+            value={newContent}
+            onChange={event => setNewContent(event.target.value)}
+            placeholder="Write your blog content here"
+            maxLength={250}
+            rows={4}
           />
         </div>
         <button type="submit">Create</button>
