@@ -208,9 +208,11 @@ button.small {
   border-left: 4px solid var(--primary-color);
 }
 
-.blog:hover {
+/* Only show hover effect when blog is not expanded */
+.blog:not(:has(.blog-details)):hover {
   transform: translateY(-3px);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  background-color: var(--light-gray);
 }
 
 .blog-basic {
@@ -220,6 +222,14 @@ button.small {
   font-weight: 600;
   font-size: 1.1rem;
   margin-bottom: 0.5rem;
+  padding: 0.5rem;
+  user-select: none;
+}
+
+/* Only show hover effect on blog-basic when blog is expanded */
+.blog:has(.blog-details) .blog-basic:hover {
+  background-color: var(--light-gray);
+  border-radius: var(--border-radius);
 }
 
 .blog-details {
