@@ -24,11 +24,14 @@ const Blog = ({ blog, updateBlog, deleteBlog, user }) => {
 
   return (
     <div className="blog">
-      <div className="blog-basic">
+      <div
+        className="blog-basic"
+        onClick={toggleVisibility}
+        role="button"
+        tabIndex={0}
+        style={{ cursor: 'pointer' }}
+      >
         <span>{blog.title} - <span className="author">{blog.user?.name}</span></span>
-        <button className="small secondary" onClick={toggleVisibility}>
-          {visible ? 'Hide' : 'View'}
-        </button>
       </div>
       {visible && (
         <div className="blog-details">
