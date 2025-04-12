@@ -119,12 +119,6 @@ const App = () => {
       setBlogs(blogs.map(blog =>
         blog.id === updatedBlog.id ? updatedBlog : blog
       ))
-
-      setNotificationType('success')
-      setErrorMessage(`Liked "${updatedBlog.title}"`)
-      setTimeout(() => {
-        setErrorMessage(null)
-      }, 5000)
     } catch (exception) {
       setNotificationType('error')
       setErrorMessage('Error updating blog')
