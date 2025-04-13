@@ -46,9 +46,9 @@ const Blog = ({ blog, updateBlog, deleteBlog, user }) => {
 
     for (const [unit, seconds] of Object.entries(intervals)) {
       const difference = Math.floor(diffInSeconds / seconds)
-      
+
       if (difference >= 1) {
-        return difference === 1 
+        return difference === 1
           ? `1 ${unit} ago`
           : `${difference} ${unit}s ago`
       }
