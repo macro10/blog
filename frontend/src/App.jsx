@@ -32,9 +32,18 @@ const App = () => {
   }, [])
 
   useEffect(() => {
-    blogService.getAll().then(blogs =>
-      setBlogs(blogs)
-    )
+    blogService.getAll()
+      .then(blogs => setBlogs(blogs))
+      .catch(error => {
+        if (error.message === 'token_expired') {
+          handleLogout()
+          setNotificationType('error')
+          setErrorMessage('Your session has expired. Please log in again.')
+          setTimeout(() => {
+            setErrorMessage(null)
+          }, 5000)
+        }
+      })
   }, [])
 
   const handleLogin = async (event) => {
@@ -104,9 +113,15 @@ const App = () => {
           setErrorMessage(null)
         }, 5000)
       }
-    } catch (exception) {
-      setNotificationType('error')
-      setErrorMessage('Error deleting blog')
+    } catch (error) {
+      if (error.message === 'token_expired') {
+        handleLogout()
+        setNotificationType('error')
+        setErrorMessage('Your session has expired. Please log in again.')
+      } else {
+        setNotificationType('error')
+        setErrorMessage('Error deleting blog')
+      }
       setTimeout(() => {
         setErrorMessage(null)
       }, 5000)
@@ -119,9 +134,15 @@ const App = () => {
       setBlogs(blogs.map(blog =>
         blog.id === updatedBlog.id ? updatedBlog : blog
       ))
-    } catch (exception) {
-      setNotificationType('error')
-      setErrorMessage('Error updating blog')
+    } catch (error) {
+      if (error.message === 'token_expired') {
+        handleLogout()
+        setNotificationType('error')
+        setErrorMessage('Your session has expired. Please log in again.')
+      } else {
+        setNotificationType('error')
+        setErrorMessage('Error updating blog')
+      }
       setTimeout(() => {
         setErrorMessage(null)
       }, 5000)
