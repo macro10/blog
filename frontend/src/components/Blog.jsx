@@ -29,6 +29,11 @@ const Blog = ({ blog, updateBlog, deleteBlog, user }) => {
     return blog.user && user && blog.user.username === user.username
   }
 
+  const formatDate = (dateString) => {
+    const date = new Date(dateString)
+    return date.toLocaleDateString() + ' ' + date.toLocaleTimeString()
+  }
+
   return (
     <div
       className="blog"
@@ -49,6 +54,7 @@ const Blog = ({ blog, updateBlog, deleteBlog, user }) => {
       {visible && (
         <div className="blog-details" onClick={(e) => e.stopPropagation()}>
           <div className="blog-content">{blog.content}</div>
+          <div className="blog-timestamp">Created: {formatDate(blog.createdAt)}</div>
           <div className="likes-container">
             <span>likes {blog.likes}</span>
             <button className="small" onClick={(e) => {
