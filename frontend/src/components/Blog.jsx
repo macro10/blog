@@ -16,7 +16,8 @@ const Blog = ({ blog, updateBlog, deleteBlog, user }) => {
     setVisible(false)
   }
 
-  const handleLike = () => {
+  const handleLike = (e) => {
+    e.stopPropagation()
     const updatedBlog = {
       ...blog,
       likes: blog.likes + 1,
@@ -85,14 +86,8 @@ const Blog = ({ blog, updateBlog, deleteBlog, user }) => {
       {visible && (
         <div className="blog-details" onClick={(e) => e.stopPropagation()}>
           <div className="blog-content">{blog.content}</div>
-          <div className="likes-container">
-            <span>likes {blog.likes}</span>
-            <button className="small" onClick={(e) => {
-              e.stopPropagation()
-              handleLike()
-            }}>Like</button>
-          </div>
           <div className="blog-actions">
+            <button className="small" onClick={handleLike}>Like</button>
             {showDeleteButton() && (
               <button
                 className="small danger"
