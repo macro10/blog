@@ -10,7 +10,9 @@ const jwt = require('jsonwebtoken')
 
 blogsRouter.get('/', async (request, response) => {
   const blogs = await Blog
-    .find({}).populate('user', { username: 1, name: 1})
+    .find({})
+    .populate('user', { username: 1, name: 1 })
+    .populate('likedBy', { id: 1 })
   response.json(blogs)
 })
 
@@ -62,20 +64,57 @@ blogsRouter.delete('/:id', async (request, response, next) => {
   response.status(204).end()
 })
 
-blogsRouter.put('/:id', async (request, response, next) => {
+blogsRouter.put('/:id', async (request, response) => {
   const body = request.body
+  const user = request.user
 
-  const blog = {
-    title: body.title,
-    content: body.content,
-    likes: body.likes,
-    user: body.user
+  if (!user) {
+    return response.status(401).json({ error: 'token invalid' })
   }
 
+  const blog = await Blog.findById(request.params.id)
+  if (!blog) {
+    return response.status(404).json({ error: 'blog not found' })
+  }
+
+  // If this is a like operation
+  if ('likes' in body && 'likedBy' in body) {
+    const currentLikedBy = blog.likedBy || []
+    const userId = user.id
+    
+    // Check if user has already liked
+    const hasLiked = currentLikedBy.includes(userId)
+    
+    let newLikedBy
+    if (hasLiked) {
+      // Unlike: remove user from likedBy
+      newLikedBy = currentLikedBy.filter(id => id.toString() !== userId.toString())
+    } else {
+      // Like: add user to likedBy
+      newLikedBy = [...currentLikedBy, userId]
+    }
+
+    const updatedBlog = await Blog.findByIdAndUpdate(
+      request.params.id,
+      {
+        likes: newLikedBy.length,
+        likedBy: newLikedBy
+      },
+      { new: true, runValidators: true }
+    ).populate('user', { username: 1, name: 1 })
+    
+    return response.json(updatedBlog)
+  }
+
+  // For non-like updates
   const updatedBlog = await Blog.findByIdAndUpdate(
     request.params.id,
-    blog,
-    { new: true, runValidators: true}
+    {
+      title: body.title,
+      content: body.content,
+      user: body.user
+    },
+    { new: true, runValidators: true }
   ).populate('user', { username: 1, name: 1 })
   
   response.json(updatedBlog)

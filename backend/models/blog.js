@@ -17,11 +17,26 @@ const blogSchema = new mongoose.Schema({
     type: Number,
     default: 0
   },
+  likedBy: {
+    type: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User'
+    }],
+    default: []
+  },
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
   }
 }, { timestamps: true })
+
+// Add a pre-save hook to ensure likes count matches likedBy length
+blogSchema.pre('save', function(next) {
+  if (this.likedBy) {
+    this.likes = this.likedBy.length
+  }
+  next()
+})
 
 blogSchema.set('toJSON', {
   transform: (document, returnedObject) => {
