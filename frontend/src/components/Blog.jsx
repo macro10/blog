@@ -72,7 +72,7 @@ const Blog = ({ blog, updateBlog, deleteBlog, user }) => {
       >
         <div className="blog-header">
           <div className="blog-title-container">
-            <span>{blog.title} - <span className="author">{blog.user?.name}</span></span>
+            <span>{blog.title} <span className="author" style={{ whiteSpace: 'nowrap' }}>- {blog.user?.name}</span></span>
           </div>
           <div className="likes-badge">
             {blog.likes} {blog.likes === 1 ? 'like' : 'likes'}
