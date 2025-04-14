@@ -10,7 +10,7 @@ const blogSchema = new mongoose.Schema({
   },
   content: {
     type: String,
-    maxLength: 250,
+    maxLength: 1500,
     required: true
   },
   likes: {
@@ -21,7 +21,7 @@ const blogSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
   }
-})
+}, { timestamps: true })
 
 blogSchema.set('toJSON', {
   transform: (document, returnedObject) => {

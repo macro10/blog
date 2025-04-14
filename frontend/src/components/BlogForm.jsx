@@ -37,7 +37,7 @@ const BlogForm = ({ createBlog }) => {
             value={newContent}
             onChange={event => setNewContent(event.target.value)}
             placeholder="Write your blog content here"
-            maxLength={250}
+            maxLength={1500}
             rows={4}
           />
         </div>

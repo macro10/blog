@@ -16,7 +16,8 @@ const Blog = ({ blog, updateBlog, deleteBlog, user }) => {
     setVisible(false)
   }
 
-  const handleLike = () => {
+  const handleLike = (e) => {
+    e.stopPropagation()
     const updatedBlog = {
       ...blog,
       likes: blog.likes + 1,
@@ -29,34 +30,65 @@ const Blog = ({ blog, updateBlog, deleteBlog, user }) => {
     return blog.user && user && blog.user.username === user.username
   }
 
+  const getRelativeTime = (dateString) => {
+    const now = new Date()
+    const past = new Date(dateString)
+    const diffInSeconds = Math.floor((now - past) / 1000)
+
+    const intervals = {
+      year: 31536000,
+      month: 2592000,
+      week: 604800,
+      day: 86400,
+      hour: 3600,
+      minute: 60
+    }
+
+    for (const [unit, seconds] of Object.entries(intervals)) {
+      const difference = Math.floor(diffInSeconds / seconds)
+
+      if (difference >= 1) {
+        return difference === 1
+          ? `1 ${unit} ago`
+          : `${difference} ${unit}s ago`
+      }
+    }
+
+    return 'just now'
+  }
+
   return (
     <div
       className="blog"
       onClick={toggleVisibility}
       role="button"
       tabIndex={0}
-      style={{ cursor: visible ? 'default' : 'pointer' }}
     >
       <div
         className="blog-basic"
         onClick={visible ? closeDetails : undefined}
         role={visible ? 'button' : undefined}
         tabIndex={visible ? 0 : undefined}
-        style={{ cursor: visible ? 'pointer' : 'inherit' }}
       >
-        <span>{blog.title} - <span className="author">{blog.user?.name}</span></span>
+        <div className="blog-header">
+          <div className="blog-title-container">
+            <span>{blog.title} <span className="author" style={{ whiteSpace: 'nowrap' }}>- {blog.user?.name}</span></span>
+          </div>
+          <div className="likes-badge">
+            {blog.likes} {blog.likes === 1 ? 'like' : 'likes'}
+          </div>
+        </div>
+        <div className="blog-time">
+          {getRelativeTime(blog.createdAt)}
+        </div>
       </div>
       {visible && (
         <div className="blog-details" onClick={(e) => e.stopPropagation()}>
-          <div className="blog-content">{blog.content}</div>
-          <div className="likes-container">
-            <span>likes {blog.likes}</span>
-            <button className="small" onClick={(e) => {
-              e.stopPropagation()
-              handleLike()
-            }}>Like</button>
+          <div className="blog-content">
+            {blog.content}
           </div>
           <div className="blog-actions">
+            <button className="small" onClick={handleLike}>Like</button>
             {showDeleteButton() && (
               <button
                 className="small danger"
