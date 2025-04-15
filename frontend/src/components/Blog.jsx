@@ -22,17 +22,20 @@ const Blog = ({ blog, updateBlog, deleteBlog, user }) => {
     // Get the current user's ID from the user object passed as prop
     const userId = user.id
 
+    // Check if user has already liked
+    const hasLiked = blog.likedBy?.some(like => like?.id === userId)
+
     // Create a minimal update object
     const blogToUpdate = {
       id: blog.id,
-      likes: blog.likes + 1,
-      likedBy: [userId]  // Send just the current user's ID
+      likes: blog.likes,  // Let the backend handle the likes count
+      likedBy: [userId]  // The backend will handle adding/removing from array
     }
 
     updateBlog(blogToUpdate)
   }
 
-  const hasLiked = blog.likedBy?.some(like => like?.id === user.id)
+  const hasLiked = blog.likedBy?.some(like => like?.id === user?.id) || false
 
   const showDeleteButton = () => {
     return blog.user && user && blog.user.username === user.username
