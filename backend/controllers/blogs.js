@@ -102,6 +102,7 @@ blogsRouter.put('/:id', async (request, response) => {
       },
       { new: true, runValidators: true }
     ).populate('user', { username: 1, name: 1 })
+    .populate('likedBy', { username: 1, name: 1, id: 1 })
     
     return response.json(updatedBlog)
   }

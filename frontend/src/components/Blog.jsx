@@ -5,6 +5,11 @@ import { useState } from 'react'
 const Blog = ({ blog, updateBlog, deleteBlog, user }) => {
   const [visible, setVisible] = useState(false)
 
+  // Add these console.logs at the top of the component
+  console.log('Blog likedBy:', blog.likedBy)
+  console.log('Current user:', user)
+  console.log('Has liked check:', blog.likedBy?.some(like => like?.id === user?.id))
+
   const toggleVisibility = () => {
     if (!visible) {
       setVisible(true)
@@ -19,18 +24,23 @@ const Blog = ({ blog, updateBlog, deleteBlog, user }) => {
   const handleLike = (e) => {
     e.stopPropagation()
 
+    // Add these console logs
+    console.log('Current user object:', user)
+    console.log('User ID:', user?.id)
+    console.log('Current blog:', blog)
+
     // Get the current user's ID from the user object passed as prop
     const userId = user.id
-
-    // Check if user has already liked
-    const hasLiked = blog.likedBy?.some(like => like?.id === userId)
 
     // Create a minimal update object
     const blogToUpdate = {
       id: blog.id,
-      likes: blog.likes,  // Let the backend handle the likes count
-      likedBy: [userId]  // The backend will handle adding/removing from array
+      likes: blog.likes,
+      likedBy: [userId]
     }
+
+    // Log the update object
+    console.log('Sending update:', blogToUpdate)
 
     updateBlog(blogToUpdate)
   }
