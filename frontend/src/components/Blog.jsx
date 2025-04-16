@@ -18,13 +18,19 @@ const Blog = ({ blog, updateBlog, deleteBlog, user }) => {
 
   const handleLike = (e) => {
     e.stopPropagation()
-    const updatedBlog = {
-      ...blog,
-      likes: blog.likes + 1,
-      user: blog.user.id
+    if (!user?.id) {
+      return
     }
-    updateBlog(updatedBlog)
+    const userId = user.id
+    const blogToUpdate = {
+      id: blog.id,
+      likes: blog.likes,
+      likedBy: [userId]
+    }
+    updateBlog(blogToUpdate)
   }
+
+  const hasLiked = blog.likedBy?.some(like => like?.id === user?.id) || false
 
   const showDeleteButton = () => {
     return blog.user && user && blog.user.username === user.username
@@ -88,7 +94,13 @@ const Blog = ({ blog, updateBlog, deleteBlog, user }) => {
             {blog.content}
           </div>
           <div className="blog-actions">
-            <button className="small" onClick={handleLike}>Like</button>
+            <button
+              className="small"
+              onClick={handleLike}
+              style={{ opacity: hasLiked ? 0.5 : 1 }}
+            >
+              {hasLiked ? 'Liked' : 'Like'}
+            </button>
             {showDeleteButton() && (
               <button
                 className="small danger"
