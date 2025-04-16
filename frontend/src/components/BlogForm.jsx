@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-const BlogForm = ({ createBlog }) => {
+const BlogForm = ({ createBlog, toggleVisibility }) => {
   const [newTitle, setNewTitle] = useState('')
   const [newContent, setNewContent] = useState('')
 
@@ -45,6 +45,7 @@ const BlogForm = ({ createBlog }) => {
           </div>
         </div>
         <div className="form-actions">
+          <button type="button" className="secondary" onClick={toggleVisibility}>Cancel</button>
           <button type="submit">Create Blog</button>
         </div>
       </form>

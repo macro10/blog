@@ -251,6 +251,7 @@ const App = () => {
       <Togglable buttonLabel="Create new blog" ref={blogFormRef}>
         <BlogForm
           createBlog={addBlog}
+          toggleVisibility={() => blogFormRef.current.toggleVisibility()}
         />
       </Togglable>
 
