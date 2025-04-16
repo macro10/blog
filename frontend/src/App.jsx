@@ -225,7 +225,7 @@ const App = () => {
             />
             <div style={{ textAlign: 'center', marginTop: '1rem' }}>
               <button className="secondary" onClick={() => setShowSignup(true)}>
-                Don't have an account? Sign up
+                Don&apos;t have an account? Sign up
               </button>
             </div>
           </>
