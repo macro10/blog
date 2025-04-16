@@ -5,9 +5,10 @@ import { useState } from 'react'
 const Blog = ({ blog, updateBlog, deleteBlog, user }) => {
   const [visible, setVisible] = useState(false)
 
-  // Add these console.logs at the top of the component
-  console.log('Blog likedBy:', blog.likedBy)
-  console.log('Current user:', user)
+  console.log('[PROD DEBUG] Blog:', blog)
+  console.log('[PROD DEBUG] Blog.likedBy:', blog.likedBy)
+  console.log('[PROD DEBUG] Current user:', user)
+
   console.log('Has liked check:', blog.likedBy?.some(like => like?.id === user?.id))
 
   const toggleVisibility = () => {
@@ -25,9 +26,13 @@ const Blog = ({ blog, updateBlog, deleteBlog, user }) => {
     e.stopPropagation()
 
     // Add these console logs
-    console.log('Current user object:', user)
-    console.log('User ID:', user?.id)
-    console.log('Current blog:', blog)
+    console.log('[PROD DEBUG] handleLike user:', user)
+    console.log('[PROD DEBUG] handleLike user.id:', user?.id)
+    if (!user?.id) {
+      console.error('[PROD DEBUG] ABORTING: user.id is missing!', user)
+      return
+    }
+    console.log('[PROD DEBUG] handleLike blog:', blog)
 
     // Get the current user's ID from the user object passed as prop
     const userId = user.id

@@ -13,6 +13,7 @@ const getAll = async () => {
       headers: { Authorization: token },
     }
     const response = await axios.get(baseUrl, config)
+    console.log('[PROD DEBUG] /api/blogs response:', response.data)
     return response.data
   } catch (error) {
     if (error.response?.status === 401) {
