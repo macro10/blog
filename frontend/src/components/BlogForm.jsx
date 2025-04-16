@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-const BlogForm = ({ createBlog }) => {
+const BlogForm = ({ createBlog, toggleVisibility }) => {
   const [newTitle, setNewTitle] = useState('')
   const [newContent, setNewContent] = useState('')
 
@@ -17,12 +17,13 @@ const BlogForm = ({ createBlog }) => {
 
   return (
     <div className="blog-form-container">
-      <h2 className="blog-form-title">Create new blog</h2>
-      <form onSubmit={addBlog}>
+      <h2 className="blog-form-title">Create New Blog</h2>
+      <form onSubmit={addBlog} className="blog-form">
         <div className="form-group">
           <label className="form-label" htmlFor="title">Title</label>
           <input
             id="title"
+            type="text"
             name="title"
             value={newTitle}
             onChange={event => setNewTitle(event.target.value)}
@@ -38,10 +39,15 @@ const BlogForm = ({ createBlog }) => {
             onChange={event => setNewContent(event.target.value)}
             placeholder="Write your blog content here"
             maxLength={1500}
-            rows={4}
           />
+          <div className="character-count">
+            {newContent.length}/1500 characters
+          </div>
         </div>
-        <button type="submit">Create</button>
+        <div className="form-actions">
+          <button type="button" className="secondary" onClick={toggleVisibility}>Cancel</button>
+          <button type="submit">Create Blog</button>
+        </div>
       </form>
     </div>
   )
