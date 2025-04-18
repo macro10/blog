@@ -2,8 +2,6 @@
 
 A full-stack blog application that allows users to create, manage, and share blog posts. This project was developed as part of the [Full Stack Open](https://fullstackopen.com/) course by the University of Helsinki, with additional modifications and improvements.
 
-> **Educational Context**: This application was created following the curriculum of the University of Helsinki's Full Stack Open course. The core concepts, architecture, and initial implementation are based on the course material, serving as a learning exercise in full-stack development. While personal modifications have been added, proper attribution and respect for the original course material is maintained throughout.
-
 ## Features
 
 - User authentication (login/register)
