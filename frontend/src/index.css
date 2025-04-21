@@ -439,3 +439,64 @@ button.small {
   box-shadow: 7px 7px 0px 0px rgba(0,0,0,1);
   transition: all 0.2s ease;
 }
+
+/* --- Sort Toggle Button Styles --- */
+
+.sort-toggle-button {
+  /* Inherit base button styles but customize if needed */
+  /* e.g., change background based on sortOrder maybe? */
+  background-color: var(--accent-color); /* Use accent color for distinction */
+  position: relative; /* Needed for potential pseudo-elements or complex shadows */
+  overflow: hidden; /* Ensures animations inside don't spill out */
+  min-width: 200px; /* Give it some consistent width */
+}
+
+/* Keep existing hover/active states from base button */
+.sort-toggle-button:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.9);
+}
+
+.sort-toggle-button:active {
+  transform: translate(1px, 1px); /* Less drastic active move */
+  box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.9);
+}
+
+/* Style the label inside */
+.sort-label {
+  display: inline-block; /* Needed for transform/animation */
+  font-weight: 800; /* Make it bolder */
+  /* Remove or comment out the transition if you use animation */
+  /* transition: opacity 0.15s ease-in-out, transform 0.15s ease-in-out; */
+  /* Apply the keyframes animation directly */
+  animation: label-fade-in 0.3s ease-out;
+}
+
+/* We need a way to trigger the animation when the text changes.
+   React re-renders, but CSS doesn't directly see the text change.
+   A simple approach is a quick fade out/in. We'll rely on React's re-render
+   triggering the transition on the element itself. If the text swap feels
+   too abrupt, more complex JS/CSS state would be needed. */
+
+/* Add a keyframe animation for a subtle entry effect (optional) */
+@keyframes label-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(3px); /* Subtle move up */
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Apply animation on initial load or if we force it via key change in React */
+/* .sort-label { animation: label-fade-in 0.3s ease-out; } */ /* Now applied above */
+/* Note: Applying animation directly might run only once.
+   The transition approach above is usually better for state changes. */ /* Key prop solves this */
+
+/* Optional: Style the static 'Sort by:' text differently */
+.sort-toggle-button span:not(.sort-label) {
+  opacity: 0.8;
+  font-weight: normal;
+}

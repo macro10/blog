@@ -194,6 +194,10 @@ const App = () => {
     }
   }
 
+  const toggleSortOrder = () => {
+    setSortOrder(prevOrder => (prevOrder === 'likes' ? 'newest' : 'likes'))
+  }
+
   const sortedBlogs = blogs ? [...blogs].sort((a, b) => {
     if (sortOrder === 'newest') {
       return new Date(b.createdAt) - new Date(a.createdAt)
@@ -263,20 +267,16 @@ const App = () => {
         />
       </Togglable>
 
-      <div className="sort-controls" style={{ margin: '1rem 0', textAlign: 'center' }}>
-        <span>Sort by: </span>
+      <div className="sort-controls" style={{ margin: '1rem 0', display: 'flex', justifyContent: 'center' }}>
         <button
-          onClick={() => setSortOrder('likes')}
-          disabled={sortOrder === 'likes'}
-          style={{ marginRight: '0.5rem' }}
+          onClick={toggleSortOrder}
+          className="neo-brutalism-button sort-toggle-button"
+          aria-live="polite"
         >
-          Most Liked
-        </button>
-        <button
-          onClick={() => setSortOrder('newest')}
-          disabled={sortOrder === 'newest'}
-        >
-          Newest
+          <span>Sort by: </span>
+          <span className="sort-label" key={sortOrder}>
+            {sortOrder === 'likes' ? 'Newest' : 'Most Liked'}
+          </span>
         </button>
       </div>
 
