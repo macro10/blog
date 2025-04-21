@@ -237,7 +237,7 @@ const App = () => {
   return (
     <div className="app-container">
       <div className="header">
-        <h1>BLOC</h1>
+        <h1>BLOG</h1>
         <div className="user-info">
           <span>{user.name} logged in</span>
           <button className="secondary" onClick={handleLogout}>
