@@ -11,6 +11,7 @@ import SignupForm from './components/SignupForm'
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
+  const [sortOrder, setSortOrder] = useState('likes')
 
   const [errorMessage, setErrorMessage] = useState(null)
   const [notificationType, setNotificationType] = useState('error')
@@ -193,6 +194,13 @@ const App = () => {
     }
   }
 
+  const sortedBlogs = blogs ? [...blogs].sort((a, b) => {
+    if (sortOrder === 'newest') {
+      return new Date(b.createdAt) - new Date(a.createdAt)
+    }
+    return b.likes - a.likes
+  }) : []
+
   if (user === null) {
     return (
       <div>
@@ -255,19 +263,34 @@ const App = () => {
         />
       </Togglable>
 
+      <div className="sort-controls" style={{ margin: '1rem 0', textAlign: 'center' }}>
+        <span>Sort by: </span>
+        <button
+          onClick={() => setSortOrder('likes')}
+          disabled={sortOrder === 'likes'}
+          style={{ marginRight: '0.5rem' }}
+        >
+          Most Liked
+        </button>
+        <button
+          onClick={() => setSortOrder('newest')}
+          disabled={sortOrder === 'newest'}
+        >
+          Newest
+        </button>
+      </div>
+
       <div className="blog-list">
         {!blogs ? (<div>Loading...</div>) : (
-          blogs
-            .sort((a, b) => b.likes - a.likes)
-            .map(blog =>
-              <Blog
-                key={blog.id}
-                blog={blog}
-                updateBlog={updateBlog}
-                deleteBlog={deleteBlog}
-                user={user}
-              />
-            )
+          sortedBlogs.map(blog =>
+            <Blog
+              key={blog.id}
+              blog={blog}
+              updateBlog={updateBlog}
+              deleteBlog={deleteBlog}
+              user={user}
+            />
+          )
         )}
       </div>
     </div>
