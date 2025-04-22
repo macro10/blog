@@ -439,3 +439,57 @@ button.small {
   box-shadow: 7px 7px 0px 0px rgba(0,0,0,1);
   transition: all 0.2s ease;
 }
+
+/* --- Sort Toggle Button Styles --- */
+
+.sort-toggle-button {
+  /* Use accent color for distinction from primary buttons */
+  background-color: var(--accent-color);
+  /* The default button hover/active styles will apply */
+}
+
+/* Style the dynamic label inside */
+.sort-label {
+  display: inline-block; /* Needed for transform animation */
+  font-weight: 800;    /* Make the current sort mode stand out */
+  animation: label-fade-in 0.3s ease-out; /* Apply fade-in on change via key prop */
+}
+
+/* Animation for the sort label text */
+@keyframes label-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(3px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Optional: Style the static 'Sort by:' text differently */
+.sort-toggle-button span:not(.sort-label) {
+  opacity: 0.8;
+  font-weight: normal;
+}
+
+/* --- Hide original Togglable Button --- */
+/* Adjust selector if your Togglable component structure differs */
+.togglable-container > div:first-child > button {
+  display: none;
+}
+
+/* --- Action Buttons Bar Styles --- */
+.action-buttons-bar {
+  display: flex;
+  justify-content: space-between; /* Pushes items to ends */
+  align-items: center; /* Vertically align items */
+  margin-top: 1rem; /* Add some space above */
+  margin-bottom: 1.5rem; /* Add space below, before the list */
+}
+
+/* Remove layout styles from sort-controls if they exist */
+.sort-controls {
+  /* Removed margin: 1rem 0, display: flex, justify-content: center */
+  /* Add any specific alignment if needed, but likely handled by parent */
+}

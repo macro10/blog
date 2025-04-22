@@ -11,6 +11,8 @@ import SignupForm from './components/SignupForm'
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
+  const [sortOrder, setSortOrder] = useState('likes')
+  const [isBlogFormVisible, setIsBlogFormVisible] = useState(false)
 
   const [errorMessage, setErrorMessage] = useState(null)
   const [notificationType, setNotificationType] = useState('error')
@@ -83,8 +85,6 @@ const App = () => {
   }
 
   const addBlog = (blogObject) => {
-    blogFormRef.current.toggleVisibility()
-
     blogService
       .create(blogObject)
       .then(returnedBlog => {
@@ -93,13 +93,22 @@ const App = () => {
           user: returnedBlog.user || user
         }
         setBlogs(blogs.concat(returnedBlog))
-      })
 
-    setNotificationType('success')
-    setErrorMessage(`A new blog "${blogObject.title}" added`)
-    setTimeout(() => {
-      setErrorMessage(null)
-    }, 5000)
+        blogFormRef.current.toggleVisibility()
+
+        setNotificationType('success')
+        setErrorMessage(`A new blog "${returnedBlog.title}" added`)
+        setTimeout(() => {
+          setErrorMessage(null)
+        }, 5000)
+      })
+      .catch(error => {
+        setNotificationType('error')
+        setErrorMessage('Error adding blog: ' + (error.response?.data?.error || error.message))
+        setTimeout(() => {
+          setErrorMessage(null)
+        }, 5000)
+      })
   }
 
   const deleteBlog = async (blogToDelete) => {
@@ -193,6 +202,17 @@ const App = () => {
     }
   }
 
+  const toggleSortOrder = () => {
+    setSortOrder(prevOrder => (prevOrder === 'likes' ? 'newest' : 'likes'))
+  }
+
+  const sortedBlogs = blogs ? [...blogs].sort((a, b) => {
+    if (sortOrder === 'newest') {
+      return new Date(b.createdAt) - new Date(a.createdAt)
+    }
+    return b.likes - a.likes
+  }) : []
+
   if (user === null) {
     return (
       <div>
@@ -248,26 +268,53 @@ const App = () => {
 
       <Notification message={errorMessage} type={notificationType} />
 
-      <Togglable buttonLabel="Create new blog" ref={blogFormRef}>
+      <Togglable
+        buttonLabel="Create new blog"
+        ref={blogFormRef}
+        onToggle={setIsBlogFormVisible}
+      >
         <BlogForm
           createBlog={addBlog}
           toggleVisibility={() => blogFormRef.current.toggleVisibility()}
         />
       </Togglable>
 
+      <div className="action-buttons-bar">
+        {!isBlogFormVisible && (
+          <button
+            onClick={() => blogFormRef.current.toggleVisibility()}
+            className="neo-brutalism-button"
+          >
+            New Blog
+          </button>
+        )}
+        {isBlogFormVisible && <div style={{ flexGrow: 1 }}></div>}
+
+        <div className="sort-controls">
+          <button
+            onClick={toggleSortOrder}
+            className="neo-brutalism-button sort-toggle-button"
+            aria-live="polite"
+          >
+            <span>Sort by: </span>
+            <span className="sort-label" key={sortOrder}>
+              {sortOrder === 'likes' ? 'Most Liked' : 'Newest'}
+            </span>
+          </button>
+        </div>
+      </div>
+
       <div className="blog-list">
         {!blogs ? (<div>Loading...</div>) : (
-          blogs
-            .sort((a, b) => b.likes - a.likes)
-            .map(blog =>
-              <Blog
-                key={blog.id}
-                blog={blog}
-                updateBlog={updateBlog}
-                deleteBlog={deleteBlog}
-                user={user}
-              />
-            )
+          sortedBlogs.map(blog =>
+            <Blog
+              key={blog.id}
+              blog={blog}
+              updateBlog={updateBlog}
+              deleteBlog={deleteBlog}
+              user={user}
+            />
+          )
         )}
       </div>
     </div>
