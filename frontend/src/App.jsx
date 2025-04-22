@@ -12,6 +12,7 @@ import SignupForm from './components/SignupForm'
 const App = () => {
   const [blogs, setBlogs] = useState([])
   const [sortOrder, setSortOrder] = useState('likes')
+  const [isBlogFormVisible, setIsBlogFormVisible] = useState(false)
 
   const [errorMessage, setErrorMessage] = useState(null)
   const [notificationType, setNotificationType] = useState('error')
@@ -84,8 +85,6 @@ const App = () => {
   }
 
   const addBlog = (blogObject) => {
-    blogFormRef.current.toggleVisibility()
-
     blogService
       .create(blogObject)
       .then(returnedBlog => {
@@ -94,13 +93,22 @@ const App = () => {
           user: returnedBlog.user || user
         }
         setBlogs(blogs.concat(returnedBlog))
-      })
 
-    setNotificationType('success')
-    setErrorMessage(`A new blog "${blogObject.title}" added`)
-    setTimeout(() => {
-      setErrorMessage(null)
-    }, 5000)
+        blogFormRef.current.toggleVisibility()
+
+        setNotificationType('success')
+        setErrorMessage(`A new blog "${returnedBlog.title}" added`)
+        setTimeout(() => {
+          setErrorMessage(null)
+        }, 5000)
+      })
+      .catch(error => {
+        setNotificationType('error')
+        setErrorMessage('Error adding blog: ' + (error.response?.data?.error || error.message))
+         setTimeout(() => {
+           setErrorMessage(null)
+         }, 5000)
+      })
   }
 
   const deleteBlog = async (blogToDelete) => {
@@ -260,7 +268,11 @@ const App = () => {
 
       <Notification message={errorMessage} type={notificationType} />
 
-      <Togglable buttonLabel="Create new blog" ref={blogFormRef}>
+      <Togglable
+        buttonLabel="Create new blog"
+        ref={blogFormRef}
+        onToggle={setIsBlogFormVisible}
+      >
         <BlogForm
           createBlog={addBlog}
           toggleVisibility={() => blogFormRef.current.toggleVisibility()}
@@ -268,12 +280,15 @@ const App = () => {
       </Togglable>
 
       <div className="action-buttons-bar">
-        <button
-          onClick={() => blogFormRef.current.toggleVisibility()}
-          className="neo-brutalism-button"
-        >
-          Create New Blog
-        </button>
+        {!isBlogFormVisible && (
+          <button
+            onClick={() => blogFormRef.current.toggleVisibility()}
+            className="neo-brutalism-button"
+          >
+            Create New Blog
+          </button>
+        )}
+        {isBlogFormVisible && <div style={{ flexGrow: 1 }}></div>}
 
         <div className="sort-controls">
           <button
