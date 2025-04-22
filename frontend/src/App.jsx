@@ -267,17 +267,26 @@ const App = () => {
         />
       </Togglable>
 
-      <div className="sort-controls" style={{ margin: '1rem 0', display: 'flex', justifyContent: 'center' }}>
+      <div className="action-buttons-bar">
         <button
-          onClick={toggleSortOrder}
-          className="neo-brutalism-button sort-toggle-button"
-          aria-live="polite"
+          onClick={() => blogFormRef.current.toggleVisibility()}
+          className="neo-brutalism-button"
         >
-          <span>Sort by: </span>
-          <span className="sort-label" key={sortOrder}>
-            {sortOrder === 'likes' ? 'Newest' : 'Most Liked'}
-          </span>
+          Create New Blog
         </button>
+
+        <div className="sort-controls">
+          <button
+            onClick={toggleSortOrder}
+            className="neo-brutalism-button sort-toggle-button"
+            aria-live="polite"
+          >
+            <span>Sort by: </span>
+            <span className="sort-label" key={sortOrder}>
+              {sortOrder === 'likes' ? 'Newest' : 'Most Liked'}
+            </span>
+          </button>
+        </div>
       </div>
 
       <div className="blog-list">
