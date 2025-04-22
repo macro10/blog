@@ -105,9 +105,9 @@ const App = () => {
       .catch(error => {
         setNotificationType('error')
         setErrorMessage('Error adding blog: ' + (error.response?.data?.error || error.message))
-         setTimeout(() => {
-           setErrorMessage(null)
-         }, 5000)
+        setTimeout(() => {
+          setErrorMessage(null)
+        }, 5000)
       })
   }
 
@@ -285,7 +285,7 @@ const App = () => {
             onClick={() => blogFormRef.current.toggleVisibility()}
             className="neo-brutalism-button"
           >
-            Create New Blog
+            New Blog
           </button>
         )}
         {isBlogFormVisible && <div style={{ flexGrow: 1 }}></div>}
@@ -298,7 +298,7 @@ const App = () => {
           >
             <span>Sort by: </span>
             <span className="sort-label" key={sortOrder}>
-              {sortOrder === 'likes' ? 'Newest' : 'Most Liked'}
+              {sortOrder === 'likes' ? 'Most Liked' : 'Newest'}
             </span>
           </button>
         </div>
