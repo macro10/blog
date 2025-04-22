@@ -1,6 +1,6 @@
 # Blog Application
 
-A full-stack blog application that allows users to create, manage, and share blog posts. This project was developed as part of the [Full Stack Open](https://fullstackopen.com/) course by the University of Helsinki, with additional modifications and improvements.
+A full-stack blog application that allows users to create and manage blog posts. This project was developed as part of the [Full Stack Open](https://fullstackopen.com/) course by the University of Helsinki, with additional modifications and improvements.
 
 ## Features
 
