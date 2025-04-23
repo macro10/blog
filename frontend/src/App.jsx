@@ -8,6 +8,7 @@ import BlogForm from './components/BlogForm'
 import LoginForm from './components/LoginForm'
 import signUpService from './services/signup'
 import SignupForm from './components/SignupForm'
+import Navbar from './components/Navbar'
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
@@ -256,15 +257,7 @@ const App = () => {
 
   return (
     <div className="app-container">
-      <div className="header">
-        <h1>BLOG</h1>
-        <div className="user-info">
-          <span>{user.name} logged in</span>
-          <button className="secondary" onClick={handleLogout}>
-            Logout
-          </button>
-        </div>
-      </div>
+      <Navbar user={user} handleLogout={handleLogout} />
 
       <Notification message={errorMessage} type={notificationType} />
 
