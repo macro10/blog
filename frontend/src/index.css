@@ -490,7 +490,7 @@ button.small {
   margin-bottom: 1.5rem; /* Add space below, before the list */
 }
 
-/* Updated Navbar Styles - Removing Additional Box and Divider */
+/* Updated Navbar Styles - Removing All Dividers */
 .navbar {
   position: fixed;
   top: 0;
@@ -523,7 +523,8 @@ button.small {
 .navbar-right {
   height: 100%;
   display: flex;
-  align-items: stretch; /* Make children stretch to full height */
+  align-items: center; /* Center items vertically */
+  padding: 0 1.5rem;
 }
 
 .logo {
@@ -537,7 +538,6 @@ button.small {
   align-items: center;
   background: white;
   margin: 0;
-  /* Removed border-right */
 }
 
 .search-container {
@@ -547,7 +547,7 @@ button.small {
   align-items: center;
   padding: 0 1.5rem;
   margin: 0;
-  border-right: 3px solid var(--secondary-color); /* Keep this as the main divider */
+  /* Removed border-right - no divider */
 }
 
 .search-input {
@@ -569,12 +569,13 @@ button.small {
   display: flex;
   align-items: center;
   gap: 1rem;
-  padding: 0 1.5rem;
-  background-color: white;
-  /* Removed box styling */
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
 }
 
 .navbar .user-info button {
+  order: -1; /* Place button first */
   background-color: var(--accent-color);
   padding: 0.5rem 1rem;
   font-weight: 700;
@@ -603,18 +604,16 @@ button.small {
   
   .logo {
     font-size: 2.5rem;
-    border-bottom: none; /* No divider between logo and search */
     justify-content: center;
     padding: 0.5rem;
   }
   
   .search-container {
-    border-right: none;
-    border-bottom: 3px solid var(--secondary-color);
     padding: 0.5rem;
+    border-bottom: 3px solid var(--secondary-color); /* Only keep the bottom border on mobile */
   }
   
-  .navbar .user-info {
+  .navbar-right {
     justify-content: center;
     padding: 0.5rem;
   }

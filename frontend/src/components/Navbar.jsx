@@ -22,7 +22,7 @@ const Navbar = ({ user, handleLogout }) => {
           </div>
           <div className="navbar-right">
             <div className="user-info">
-              <span>{user.name} logged in</span>
+              <span>{user.name}</span>
               <button className="secondary" onClick={handleLogout}>
                 LOGOUT
               </button>
