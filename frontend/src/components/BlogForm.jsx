@@ -17,7 +17,6 @@ const BlogForm = ({ createBlog, toggleVisibility }) => {
 
   return (
     <div className="blog-form-container">
-      <h2 className="blog-form-title">Create New Blog</h2>
       <form onSubmit={addBlog} className="blog-form">
         <div className="form-group">
           <label className="form-label" htmlFor="title">Title</label>
@@ -46,7 +45,7 @@ const BlogForm = ({ createBlog, toggleVisibility }) => {
         </div>
         <div className="form-actions">
           <button type="button" className="secondary" onClick={toggleVisibility}>Cancel</button>
-          <button type="submit">Create Blog</button>
+          <button type="submit">Send</button>
         </div>
       </form>
     </div>

@@ -285,7 +285,7 @@ const App = () => {
             onClick={() => blogFormRef.current.toggleVisibility()}
             className="neo-brutalism-button"
           >
-            New Blog
+            Create New
           </button>
         )}
         {isBlogFormVisible && <div style={{ flexGrow: 1 }}></div>}
@@ -296,7 +296,7 @@ const App = () => {
             className="neo-brutalism-button sort-toggle-button"
             aria-live="polite"
           >
-            <span>Sort by: </span>
+            <span>Sort: </span>
             <span className="sort-label" key={sortOrder}>
               {sortOrder === 'likes' ? 'Most Liked' : 'Newest'}
             </span>
