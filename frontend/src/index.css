@@ -379,7 +379,7 @@ button.small {
 .blog-form {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 0rem;
 }
 
 .blog-form textarea {
@@ -486,10 +486,4 @@ button.small {
   align-items: center; /* Vertically align items */
   margin-top: 1rem; /* Add some space above */
   margin-bottom: 1.5rem; /* Add space below, before the list */
-}
-
-/* Remove layout styles from sort-controls if they exist */
-.sort-controls {
-  /* Removed margin: 1rem 0, display: flex, justify-content: center */
-  /* Add any specific alignment if needed, but likely handled by parent */
 }
