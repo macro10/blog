@@ -1,7 +1,7 @@
 // frontend/src/components/Navbar.jsx
 import { useState } from 'react'
 
-const Navbar = ({ user, handleLogout }) => {
+const Navbar = ({ user, handleLogout, onCreateNew, isBlogFormVisible }) => {
   const [searchTerm, setSearchTerm] = useState('')
 
   return (
@@ -21,6 +21,14 @@ const Navbar = ({ user, handleLogout }) => {
             </div>
           </div>
           <div className="navbar-right">
+            {!isBlogFormVisible && (
+              <button
+                onClick={onCreateNew}
+                className="primary"
+              >
+                CREATE NEW
+              </button>
+            )}
             <div className="user-info">
               <span>{user.name}</span>
               <button className="secondary" onClick={handleLogout}>

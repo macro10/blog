@@ -257,7 +257,12 @@ const App = () => {
 
   return (
     <div className="app-container">
-      <Navbar user={user} handleLogout={handleLogout} />
+      <Navbar
+        user={user}
+        handleLogout={handleLogout}
+        onCreateNew={() => blogFormRef.current.toggleVisibility()}
+        isBlogFormVisible={isBlogFormVisible}
+      />
 
       <Notification message={errorMessage} type={notificationType} />
 
@@ -273,14 +278,6 @@ const App = () => {
       </Togglable>
 
       <div className="action-buttons-bar">
-        {!isBlogFormVisible && (
-          <button
-            onClick={() => blogFormRef.current.toggleVisibility()}
-            className="neo-brutalism-button"
-          >
-            Create New
-          </button>
-        )}
         {isBlogFormVisible && <div style={{ flexGrow: 1 }}></div>}
 
         <div className="sort-controls">
