@@ -19,13 +19,15 @@
   --border-radius: 0px;
   --box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.9);
   --transition: all 0.2s ease;
+  --grid-color: rgb(234, 234, 234);
+  --grid-size: 16px;
 }
 
 body {
   font-family: 'Space Grotesk', 'Helvetica Neue', sans-serif;
   line-height: 1.6;
   color: var(--text-color);
-  background-color: var(--background-color);
+  background-color: transparent;
   padding: 20px;
   max-width: 1200px;
   margin: 0 auto;
@@ -55,7 +57,7 @@ h2 {
 .app-container {
   max-width: 1200px;
   margin: 0 auto;
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.95);
   border: 3px solid var(--secondary-color);
   padding: 2rem;
   box-shadow: var(--box-shadow);
@@ -497,7 +499,7 @@ button.small {
   top: 0;
   left: 0;
   width: 100%;
-  background-color: white;
+  background-color: rgb(255, 255, 255);
   z-index: 1000;
   border-bottom: 3px solid var(--secondary-color);
   height: 80px;
@@ -692,4 +694,28 @@ button.small {
 .logout-button:hover .logout-text {
   transform: translateY(-50%);
   opacity: 1;
+}
+
+/* Create a fixed background that covers the entire viewport */
+html {
+  position: relative;
+  min-height: 100%;
+  background-color: rgb(255, 255, 255);
+}
+
+/* Add the grid background */
+html::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  
+  /* Create the grid with linear gradients */
+  background-image: 
+    linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
+  background-size: var(--grid-size) var(--grid-size);
 }
