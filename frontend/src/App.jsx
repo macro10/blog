@@ -279,6 +279,14 @@ const App = () => {
 
       <div className="action-buttons-bar">
         {isBlogFormVisible && <div style={{ flexGrow: 1 }}></div>}
+        {!isBlogFormVisible && (
+          <button
+            onClick={() => blogFormRef.current.toggleVisibility()}
+            className="create-new-button action-bar-create-new"
+          >
+            CREATE NEW
+          </button>
+        )}
 
         <div className="sort-controls">
           <button

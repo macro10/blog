@@ -725,3 +725,42 @@ html::before {
     linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
   background-size: var(--grid-size) var(--grid-size);
 }
+
+/* Create New button styles for responsive placement */
+.create-new-button {
+  display: block;
+  white-space: nowrap;
+  background-color: var(--primary-color);
+  padding: 0.6rem 1.2rem;
+  font-weight: 700;
+  border: 3px solid var(--secondary-color);
+  box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.9);
+}
+
+/* Show create new button in different locations based on screen size */
+.navbar-create-new {
+  display: block; /* Shown in navbar by default (large screens) */
+}
+
+.action-bar-create-new {
+  display: none; /* Hidden in action bar by default (large screens) */
+}
+
+/* Media queries for responsive behavior */
+@media (max-width: 768px) {
+  .navbar-create-new {
+    display: none; /* Hide from navbar on smaller screens */
+  }
+  
+  .action-bar-create-new {
+    display: block; /* Show in action bar on smaller screens */
+  }
+  
+  /* Adjust action buttons bar layout for small screens */
+  .action-buttons-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+  }
+}
