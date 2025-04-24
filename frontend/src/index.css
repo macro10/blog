@@ -60,6 +60,7 @@ h2 {
   padding: 2rem;
   box-shadow: var(--box-shadow);
   margin-bottom: 2rem;
+  margin-top: 5rem;
 }
 
 .header {
@@ -581,6 +582,13 @@ button.small {
 
 .navbar-right button.secondary {
   background-color: var(--accent-color);
+  padding: 0.6rem 1.2rem;
+  border: 3px solid var(--secondary-color);
+  box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.9);
+}
+
+.navbar-right button.tertiary {
+  background-color: var(--primary-color);
   padding: 0.6rem 1.2rem;
   border: 3px solid var(--secondary-color);
   box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.9);

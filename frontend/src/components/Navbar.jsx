@@ -24,7 +24,7 @@ const Navbar = ({ user, handleLogout, onCreateNew, isBlogFormVisible }) => {
             {!isBlogFormVisible && (
               <button
                 onClick={onCreateNew}
-                className="primary"
+                className="tertiary"
               >
                 CREATE NEW
               </button>
