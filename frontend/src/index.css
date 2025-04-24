@@ -57,10 +57,10 @@ h2 {
 .app-container {
   max-width: 1200px;
   margin: 0 auto;
-  background-color: rgba(255, 255, 255, 0.95);
-  border: 3px solid var(--secondary-color);
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
   padding: 2rem;
-  box-shadow: var(--box-shadow);
   margin-bottom: 2rem;
   margin-top: 5rem;
 }
@@ -502,7 +502,7 @@ button.small {
   background-color: rgb(255, 255, 255);
   z-index: 1000;
   border-bottom: 3px solid var(--secondary-color);
-  height: 80px;
+  height: 104px;
   /*box-shadow: 1px 1px 0px rgba(0, 0, 0, 0.8);*/
 }
 

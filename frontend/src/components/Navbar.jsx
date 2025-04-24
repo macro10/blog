@@ -11,13 +11,13 @@ const Navbar = ({ user, handleLogout, onCreateNew, isBlogFormVisible }) => {
           <div className="navbar-left">
             <div className="logo">BLOG</div>
             <div className="search-container">
-              <input
+              {/* <input
                 type="text"
                 placeholder="Search blogs..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="search-input"
-              />
+              /> */}
             </div>
           </div>
           <div className="navbar-right">
