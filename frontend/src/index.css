@@ -490,7 +490,7 @@ button.small {
   margin-bottom: 1.5rem; /* Add space below, before the list */
 }
 
-/* Updated Navbar Styles - Removing All Dividers */
+/* Updated Navbar Styles - More Sleek but Still Brutalist */
 .navbar {
   position: fixed;
   top: 0;
@@ -498,62 +498,54 @@ button.small {
   width: 100%;
   background-color: white;
   z-index: 1000;
-  border-bottom: 3px solid var(--secondary-color);
-  height: 80px; /* Fixed navbar height */
-  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid var(--secondary-color);
+  height: 80px;
+  /*box-shadow: 1px 1px 0px rgba(0, 0, 0, 0.8);*/
 }
 
 .navbar-content {
   max-width: 1200px;
   height: 100%;
   margin: 0 auto;
-  padding: 0;
+  padding: 0 20px;
   display: flex;
   justify-content: space-between;
-  align-items: stretch; /* Make children stretch to full height */
+  align-items: center;
 }
 
 .navbar-left {
-  height: 100%;
   display: flex;
-  align-items: stretch; /* Make children stretch to full height */
-  flex: 1;
-}
-
-.navbar-right {
-  height: 100%;
-  display: flex;
-  align-items: center; /* Center items vertically */
-  padding: 0 1.5rem;
+  align-items: center;
+  gap: 2rem;
 }
 
 .logo {
   font-family: 'Playfair Display', serif;
   font-weight: 900;
-  font-size: 3.5rem;
-  line-height: 1;
+  font-size: 3rem;
   letter-spacing: -1px;
-  padding: 0 0.8rem;
-  display: flex;
-  align-items: center;
-  background: white;
-  margin: 0;
+  line-height: 1;
+  /*transform: rotate(-1deg);*/
+  /*border: 3px solid var(--secondary-color);*/
+  padding: 0 15px;
+  background-color: white;
+  /*box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.9);*/
+  transition: transform 0.2s ease;
+}
+
+.logo:hover {
+  transform: rotate(0deg) scale(1.02);
 }
 
 .search-container {
   position: relative;
-  flex: 1;
-  display: flex;
-  align-items: center;
-  padding: 0 1.5rem;
-  margin: 0;
-  /* Removed border-right - no divider */
+  width: 300px;
 }
 
 .search-input {
   width: 100%;
-  padding: 0.75rem;
-  border: 2px solid var(--secondary-color);
+  padding: 0.6rem 1rem;
+  border: 3px solid var(--secondary-color);
   font-size: 1rem;
   background-color: var(--light-gray);
   transition: var(--transition);
@@ -562,7 +554,41 @@ button.small {
 .search-input:focus {
   outline: none;
   border-color: var(--primary-color);
-  box-shadow: 3px 3px 0px var(--secondary-color);
+  box-shadow: 4px 4px 0px var(--secondary-color);
+  transform: translateY(-2px);
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.navbar-right button {
+  transform: rotate(1deg);
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  transition: all 0.2s ease;
+}
+
+.navbar-right button.primary {
+  background-color: var(--primary-color);
+  padding: 0.6rem 1.2rem;
+  font-weight: 700;
+  border: 3px solid var(--secondary-color);
+  box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.9);
+}
+
+.navbar-right button.secondary {
+  background-color: var(--accent-color);
+  padding: 0.6rem 1.2rem;
+  border: 3px solid var(--secondary-color);
+  box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.9);
+}
+
+.navbar-right button:hover {
+  transform: rotate(0deg) translateY(-3px);
+  box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.9);
 }
 
 .navbar .user-info {
@@ -574,17 +600,13 @@ button.small {
   box-shadow: none;
 }
 
-.navbar .user-info button {
-  order: -1; /* Place button first */
-  background-color: var(--accent-color);
-  padding: 0.5rem 1rem;
+.navbar .user-info span {
   font-weight: 700;
-  border: 2px solid var(--secondary-color);
-  box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.9);
-}
-
-.navbar-spacer {
-  height: 80px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  border-bottom: 2px solid var(--primary-color);
+  padding-bottom: 2px;
 }
 
 /* Media Queries */
@@ -595,27 +617,32 @@ button.small {
   
   .navbar-content {
     flex-direction: column;
-    align-items: stretch;
+    padding: 10px;
   }
   
   .navbar-left {
-    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
   }
   
   .logo {
     font-size: 2.5rem;
-    justify-content: center;
-    padding: 0.5rem;
+    transform: none;
+    margin-bottom: 0.5rem;
   }
   
   .search-container {
-    padding: 0.5rem;
-    border-bottom: 3px solid var(--secondary-color); /* Only keep the bottom border on mobile */
+    width: 100%;
   }
   
   .navbar-right {
+    width: 100%;
     justify-content: center;
-    padding: 0.5rem;
+    flex-wrap: wrap;
+    gap: 1rem;
   }
   
   .navbar-spacer {
