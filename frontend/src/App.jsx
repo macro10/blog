@@ -291,7 +291,7 @@ const App = () => {
         <div className="sort-controls">
           <button
             onClick={toggleSortOrder}
-            className="neo-brutalism-button sort-toggle-button"
+            className="create-new-button sort-toggle-button"
             aria-live="polite"
           >
             <span>Sort: </span>

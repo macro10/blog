@@ -448,9 +448,10 @@ button.small {
 /* --- Sort Toggle Button Styles --- */
 
 .sort-toggle-button {
-  /* Use accent color for distinction from primary buttons */
-  background-color: var(--accent-color);
-  /* The default button hover/active styles will apply */
+  background-color: var(--accent-color) !important;
+  padding: 0.6rem 1.2rem;
+  font-weight: 700;
+  white-space: nowrap;
 }
 
 /* Style the dynamic label inside */
