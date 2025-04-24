@@ -499,7 +499,7 @@ button.small {
   width: 100%;
   background-color: white;
   z-index: 1000;
-  border-bottom: 1px solid var(--secondary-color);
+  border-bottom: 3px solid var(--secondary-color);
   height: 80px;
   /*box-shadow: 1px 1px 0px rgba(0, 0, 0, 0.8);*/
 }
@@ -613,7 +613,6 @@ button.small {
   letter-spacing: 0.5px;
   text-transform: uppercase;
   font-size: 0.9rem;
-  border-bottom: 2px solid var(--primary-color);
   padding-bottom: 2px;
 }
 
@@ -656,4 +655,41 @@ button.small {
   .navbar-spacer {
     height: 180px;
   }
+}
+
+/* Logout button hover animation */
+.logout-button {
+  position: relative;
+  overflow: hidden;
+  transition: var(--transition);
+}
+
+.logout-button .username-text,
+.logout-button .logout-text {
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.logout-button .logout-text {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  transform: translateY(120%);
+  opacity: 0;
+}
+
+.logout-button .username-text {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.logout-button:hover .username-text {
+  transform: translateY(-120%);
+  opacity: 0;
+}
+
+.logout-button:hover .logout-text {
+  transform: translateY(-50%);
+  opacity: 1;
 }

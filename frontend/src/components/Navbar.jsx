@@ -30,9 +30,9 @@ const Navbar = ({ user, handleLogout, onCreateNew, isBlogFormVisible }) => {
               </button>
             )}
             <div className="user-info">
-              <span>{user.name}</span>
-              <button className="primary" onClick={handleLogout}>
-                LOGOUT
+              <button className="logout-button primary" onClick={handleLogout}>
+                <span className="username-text">{user.name}</span>
+                <span className="logout-text">LOGOUT</span>
               </button>
             </div>
           </div>
