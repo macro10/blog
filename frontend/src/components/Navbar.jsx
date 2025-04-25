@@ -38,7 +38,7 @@ const Navbar = ({ user, handleLogout, onCreateNew, isBlogFormVisible }) => {
           </div>
         </div>
       </div>
-      <div className="navbar-spacer"></div>
+      <div className="navbar-spacing"></div>
     </div>
   )
 }

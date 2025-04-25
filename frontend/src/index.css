@@ -62,7 +62,7 @@ h2 {
   box-shadow: none;
   padding: 0;
   margin-bottom: 2rem;
-  margin-top: 6rem;
+  margin-top: 0;
 }
 
 .app-container > *:not(.blog-list):not(.action-buttons-bar) {
@@ -841,7 +841,7 @@ body {
   box-shadow: none;
   padding: 0;
   margin-bottom: 2rem;
-  margin-top: 6rem;
+  margin-top: 0;
 }
 
 /* Blog-list keeps its padding */
@@ -914,5 +914,36 @@ body {
   .blog-list,
   .action-buttons-bar {
     padding: 0 20px;
+  }
+}
+
+/* Add this after the navbar styles and before the app-container styles */
+.navbar-spacing {
+  height: 120px; /* Adjust this value to control the spacing */
+  width: 100%;
+}
+
+/* Then update the app-container to remove margin-top */
+.app-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  margin-bottom: 2rem;
+  margin-top: 0; /* Remove this top margin */
+}
+
+/* Add responsive adjustments */
+@media (max-width: 768px) {
+  .navbar-spacing {
+    height: 80px; /* Less space on smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar-spacing {
+    height: 60px; /* Even less space on very small screens */
   }
 }
