@@ -62,7 +62,7 @@ h2 {
   box-shadow: none;
   padding: 2rem;
   margin-bottom: 2rem;
-  margin-top: 5rem;
+  margin-top: 6rem;
 }
 
 .header {
@@ -662,7 +662,7 @@ button.small {
   }
   
   .navbar-spacer {
-    height: 180px;
+    height: 0px;
   }
 }
 
