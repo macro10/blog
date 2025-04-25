@@ -28,7 +28,7 @@ body {
   line-height: 1.6;
   color: var(--text-color);
   background-color: transparent;
-  padding: 20px;
+  padding: 0;
   max-width: 1200px;
   margin: 0 auto;
 }
@@ -60,9 +60,14 @@ h2 {
   background-color: transparent;
   border: none;
   box-shadow: none;
-  padding: 2rem;
+  padding: 0;
   margin-bottom: 2rem;
   margin-top: 6rem;
+}
+
+.app-container > *:not(.blog-list):not(.action-buttons-bar) {
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .header {
@@ -194,6 +199,7 @@ button.small {
   display: grid;
   gap: 2rem;
   margin-top: 2rem;
+  padding: 0 20px;
 }
 
 .blog {
@@ -488,10 +494,11 @@ button.small {
 /* --- Action Buttons Bar Styles --- */
 .action-buttons-bar {
   display: flex;
-  justify-content: space-between; /* Pushes items to ends */
-  align-items: center; /* Vertically align items */
-  margin-top: 1rem; /* Add some space above */
-  margin-bottom: 1.5rem; /* Add space below, before the list */
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
+  padding: 0 20px;
 }
 
 /* Updated Navbar Styles - More Sleek but Still Brutalist */
@@ -521,6 +528,7 @@ button.small {
   display: flex;
   align-items: center;
   gap: 2rem;
+  padding-left: 0;
 }
 
 .logo {
@@ -529,11 +537,8 @@ button.small {
   font-size: 3.5rem;
   letter-spacing: -1px;
   line-height: 1;
-  /*transform: rotate(-1deg);*/
-  /*border: 3px solid var(--secondary-color);*/
-  padding: 0 15px;
+  padding: 0;
   background-color: white;
-  /*box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.9);*/
   transition: transform 0.2s ease;
 }
 
@@ -566,6 +571,7 @@ button.small {
   display: flex;
   align-items: center;
   gap: 1.5rem;
+  padding-right: 0;
 }
 
 .navbar-right button {
@@ -764,4 +770,36 @@ html::before {
     align-items: center;
     gap: 1rem;
   }
+}
+
+/* Update navbar-content to ensure alignment with app-container */
+.navbar-content {
+  max-width: 1200px;
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Remove any horizontal padding/margins from logo and logout button */
+.logo {
+  font-family: 'Playfair Display', serif;
+  font-weight: 900;
+  font-size: 3.5rem;
+  letter-spacing: -1px;
+  line-height: 1;
+  padding: 0;
+  background-color: white;
+  transition: transform 0.2s ease;
+}
+
+.navbar-right .user-info {
+  padding: 0;
+  margin: 0;
+}
+
+.navbar-right .user-info button {
+  margin: 0;
 }
