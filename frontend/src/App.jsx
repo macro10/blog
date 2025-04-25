@@ -8,6 +8,7 @@ import BlogForm from './components/BlogForm'
 import LoginForm from './components/LoginForm'
 import signUpService from './services/signup'
 import SignupForm from './components/SignupForm'
+import Navbar from './components/Navbar'
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
@@ -256,15 +257,12 @@ const App = () => {
 
   return (
     <div className="app-container">
-      <div className="header">
-        <h1>BLOG</h1>
-        <div className="user-info">
-          <span>{user.name} logged in</span>
-          <button className="secondary" onClick={handleLogout}>
-            Logout
-          </button>
-        </div>
-      </div>
+      <Navbar
+        user={user}
+        handleLogout={handleLogout}
+        onCreateNew={() => blogFormRef.current.toggleVisibility()}
+        isBlogFormVisible={isBlogFormVisible}
+      />
 
       <Notification message={errorMessage} type={notificationType} />
 
@@ -280,20 +278,20 @@ const App = () => {
       </Togglable>
 
       <div className="action-buttons-bar">
+        {isBlogFormVisible && <div style={{ flexGrow: 1 }}></div>}
         {!isBlogFormVisible && (
           <button
             onClick={() => blogFormRef.current.toggleVisibility()}
-            className="neo-brutalism-button"
+            className="create-new-button action-bar-create-new"
           >
-            Create New
+            CREATE NEW
           </button>
         )}
-        {isBlogFormVisible && <div style={{ flexGrow: 1 }}></div>}
 
         <div className="sort-controls">
           <button
             onClick={toggleSortOrder}
-            className="neo-brutalism-button sort-toggle-button"
+            className="create-new-button sort-toggle-button"
             aria-live="polite"
           >
             <span>Sort: </span>

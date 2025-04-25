@@ -19,13 +19,15 @@
   --border-radius: 0px;
   --box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.9);
   --transition: all 0.2s ease;
+  --grid-color: rgb(234, 234, 234);
+  --grid-size: 16px;
 }
 
 body {
   font-family: 'Space Grotesk', 'Helvetica Neue', sans-serif;
   line-height: 1.6;
   color: var(--text-color);
-  background-color: var(--background-color);
+  background-color: transparent;
   padding: 20px;
   max-width: 1200px;
   margin: 0 auto;
@@ -53,11 +55,14 @@ h2 {
 
 /* Layout & Containers */
 .app-container {
-  background-color: white;
-  border: 3px solid var(--secondary-color);
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
   padding: 2rem;
-  box-shadow: var(--box-shadow);
   margin-bottom: 2rem;
+  margin-top: 6rem;
 }
 
 .header {
@@ -443,9 +448,10 @@ button.small {
 /* --- Sort Toggle Button Styles --- */
 
 .sort-toggle-button {
-  /* Use accent color for distinction from primary buttons */
-  background-color: var(--accent-color);
-  /* The default button hover/active styles will apply */
+  background-color: var(--accent-color) !important;
+  padding: 0.6rem 1.2rem;
+  font-weight: 700;
+  white-space: nowrap;
 }
 
 /* Style the dynamic label inside */
@@ -486,4 +492,276 @@ button.small {
   align-items: center; /* Vertically align items */
   margin-top: 1rem; /* Add some space above */
   margin-bottom: 1.5rem; /* Add space below, before the list */
+}
+
+/* Updated Navbar Styles - More Sleek but Still Brutalist */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgb(255, 255, 255);
+  z-index: 1000;
+  border-bottom: 3px solid var(--secondary-color);
+  height: 104px;
+  /*box-shadow: 1px 1px 0px rgba(0, 0, 0, 0.8);*/
+}
+
+.navbar-content {
+  max-width: 1200px;
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.logo {
+  font-family: 'Playfair Display', serif;
+  font-weight: 900;
+  font-size: 3.5rem;
+  letter-spacing: -1px;
+  line-height: 1;
+  /*transform: rotate(-1deg);*/
+  /*border: 3px solid var(--secondary-color);*/
+  padding: 0 15px;
+  background-color: white;
+  /*box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.9);*/
+  transition: transform 0.2s ease;
+}
+
+.logo:hover {
+  transform: rotate(0deg) scale(1.02);
+}
+
+.search-container {
+  position: relative;
+  width: 300px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 0.6rem 1rem;
+  border: 3px solid var(--secondary-color);
+  font-size: 1rem;
+  background-color: var(--light-gray);
+  transition: var(--transition);
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 4px 4px 0px var(--secondary-color);
+  transform: translateY(-2px);
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.navbar-right button {
+  /*transform: rotate(1deg);*/
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  /*transition: all 0.2s ease;*/
+}
+
+.navbar-right button.primary {
+  background-color: white;
+  padding: 0.6rem 1.2rem;
+  font-weight: 700;
+  border: 3px solid var(--secondary-color);
+  box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.9);
+}
+
+.navbar-right button.secondary {
+  background-color: var(--accent-color);
+  padding: 0.6rem 1.2rem;
+  border: 3px solid var(--secondary-color);
+  box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.9);
+}
+
+.navbar-right button.tertiary {
+  white-space: nowrap; /* Prevent text wrapping */
+  min-width: 140px; /* Ensure enough width */
+  width: auto !important; /* Force auto width */
+  font-size: 1rem; /* Keep font size consistent */
+  padding: 0.6rem 1.2rem; /* Consistent padding */
+  display: inline-block; /* Keep as inline-block */
+}
+
+.navbar-right button:hover {
+  transform: rotate(0deg) translateY(-3px);
+  box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.9);
+}
+
+.navbar .user-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+.navbar .user-info span {
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  padding-bottom: 2px;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .navbar {
+    height: auto;
+  }
+  
+  .navbar-content {
+    flex-direction: row !important; /* Force row layout */
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .navbar-left {
+    margin-right: auto;
+    flex: 0 0 auto;
+    width: auto !important;
+    margin-bottom: 0 !important;
+    flex-wrap: nowrap;
+  }
+  
+  .navbar-right {
+    flex: 0 0 auto;
+    width: auto !important;
+    justify-content: flex-end;
+    flex-wrap: nowrap;
+    flex-direction: row !important;
+  }
+  
+  /* Hide search on small screens to make more room */
+  .search-container {
+    display: none;
+  }
+  
+  .logo {
+    font-size: 2.5rem;
+    transform: none;
+    margin-bottom: 0.5rem;
+  }
+  
+  .navbar-spacer {
+    height: 0px;
+  }
+}
+
+/* Logout button hover animation */
+.logout-button {
+  position: relative;
+  overflow: hidden;
+  transition: var(--transition);
+}
+
+.logout-button .username-text,
+.logout-button .logout-text {
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.logout-button .logout-text {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  transform: translateY(120%);
+  opacity: 0;
+}
+
+.logout-button .username-text {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.logout-button:hover .username-text {
+  transform: translateY(-120%);
+  opacity: 0;
+}
+
+.logout-button:hover .logout-text {
+  transform: translateY(-50%);
+  opacity: 1;
+}
+
+/* Create a fixed background that covers the entire viewport */
+html {
+  position: relative;
+  min-height: 100%;
+  background-color: rgb(255, 255, 255);
+}
+
+/* Add the grid background */
+html::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  
+  /* Create the grid with linear gradients */
+  background-image: 
+    linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
+  background-size: var(--grid-size) var(--grid-size);
+}
+
+/* Create New button styles for responsive placement */
+.create-new-button {
+  display: block;
+  white-space: nowrap;
+  background-color: var(--primary-color);
+  padding: 0.6rem 1.2rem;
+  font-weight: 700;
+  border: 3px solid var(--secondary-color);
+  box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.9);
+}
+
+/* Show create new button in different locations based on screen size */
+.navbar-create-new {
+  display: block; /* Shown in navbar by default (large screens) */
+}
+
+.action-bar-create-new {
+  display: none; /* Hidden in action bar by default (large screens) */
+}
+
+/* Media queries for responsive behavior */
+@media (max-width: 768px) {
+  .navbar-create-new {
+    display: none; /* Hide from navbar on smaller screens */
+  }
+  
+  .action-bar-create-new {
+    display: block; /* Show in action bar on smaller screens */
+  }
+  
+  /* Adjust action buttons bar layout for small screens */
+  .action-buttons-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+  }
 }
