@@ -786,7 +786,7 @@ input[type="url"]:focus {
   
   /* Navbar */
   .navbar {
-    min-height: 140px;
+    min-height: 80px;
     padding: 16px 0;
   }
   
