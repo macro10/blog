@@ -470,8 +470,7 @@ input[type="url"]:focus {
 
 /* Login Form */
 .login-container {
-  max-width: 500px;
-  margin: 4rem auto;
+  margin: 4rem var(--standard-padding);
   padding: 2rem;
   background-color: white;
   border: var(--border-style);
