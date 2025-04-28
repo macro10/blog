@@ -795,3 +795,9 @@ input[type="url"]:focus {
     height: 140px;
   }
 }
+
+.time-separator {
+  margin: 0 0.3rem;
+  opacity: 0.7;
+  font-weight: bold;
+}
