@@ -639,6 +639,7 @@ input[type="url"]:focus {
   font-weight: 600;
   text-transform: uppercase;
   box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.9);
+  margin-left: 3rem;
 }
 
 .time-badge {
@@ -762,10 +763,6 @@ input[type="url"]:focus {
   .blog-meta {
     flex-wrap: wrap;
     gap: 0.5rem;
-  }
-  
-  .likes-badge, .time-badge {
-    font-size: 0.8rem;
   }
   
   /* Action buttons */
