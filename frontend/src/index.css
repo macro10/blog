@@ -639,7 +639,9 @@ input[type="url"]:focus {
   font-weight: 600;
   text-transform: uppercase;
   box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.9);
-  margin-left: 3rem;
+  margin-left: 2rem;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .time-badge {
