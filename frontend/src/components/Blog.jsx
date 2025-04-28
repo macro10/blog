@@ -78,14 +78,14 @@ const Blog = ({ blog, updateBlog, deleteBlog, user }) => {
       >
         <div className="blog-header">
           <div className="blog-title-container">
-            <span>{blog.title} <span className="author" style={{ whiteSpace: 'nowrap' }}>- {blog.user?.name}</span></span>
+            <span>{blog.title}</span>
           </div>
           <div className="likes-badge">
             {blog.likes} {blog.likes === 1 ? 'like' : 'likes'}
           </div>
         </div>
         <div className="blog-time">
-          {getRelativeTime(blog.createdAt)}
+          {getRelativeTime(blog.createdAt)} <span className="time-separator">•</span> <span className="author" style={{ whiteSpace: 'nowrap' }}>{blog.user?.name}</span>
         </div>
       </div>
       {visible && (
