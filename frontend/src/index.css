@@ -778,6 +778,17 @@ input[type="url"]:focus {
     gap: 0.5rem;
   }
   
+  /* Blog title smaller on tablets */
+  .blog-title-container {
+    font-size: 1.4rem;
+  }
+  
+  /* Likes badge smaller on tablets */
+  .likes-badge {
+    font-size: 0.9rem;
+    padding: 0.2rem 0.6rem;
+  }
+  
   /* Action buttons */
   .action-buttons-bar {
     gap: 1rem;
@@ -803,6 +814,17 @@ input[type="url"]:focus {
   /* Update spacing to match new navbar height */
   .navbar-spacing {
     height: 140px;
+  }
+  
+  /* Blog title even smaller on mobile phones */
+  .blog-title-container {
+    font-size: 1.2rem;
+  }
+  
+  /* Likes badge even smaller on mobile phones */
+  .likes-badge {
+    font-size: 0.8rem;
+    padding: 0.2rem 0.5rem;
   }
 }
 
