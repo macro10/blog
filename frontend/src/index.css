@@ -621,6 +621,16 @@ input[type="url"]:focus {
   border-top: 3px solid var(--secondary-color);
 }
 
+.hashtag {
+  color: #1da1f2;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.hashtag:hover {
+  opacity: 0.8
+}
+
 .blog-details > div {
   margin-bottom: 0.75rem;
 }

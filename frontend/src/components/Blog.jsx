@@ -63,6 +63,17 @@ const Blog = ({ blog, updateBlog, deleteBlog, user }) => {
     return 'just now'
   }
 
+  const formatContentWithHashtags = (content) => {
+    if (!content) return ''
+    const words = content.split(/(\s+)/)
+    return words.map((word, index) => {
+      if (word.startsWith('#')) {
+        return <span key={index} className="hashtag">{word}</span>
+      }
+      return word
+    })
+  }
+
   return (
     <div
       className="blog"
@@ -91,7 +102,7 @@ const Blog = ({ blog, updateBlog, deleteBlog, user }) => {
       {visible && (
         <div className="blog-details" onClick={(e) => e.stopPropagation()}>
           <div className="blog-content">
-            {blog.content}
+            {formatContentWithHashtags(blog.content)}
           </div>
           <div className="blog-actions">
             <button
