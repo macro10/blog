@@ -842,3 +842,23 @@ input[type="url"]:focus {
   opacity: 0.7;
   font-weight: bold;
 }
+
+/* Hide mobile search bar by default */
+.mobile-search-bar {
+  display: none;
+  padding: 1rem var(--standard-padding) 0 var(--standard-padding);
+  background: white;
+  border-bottom: var(--border-style);
+  z-index: 999;
+  position: relative;
+}
+
+/* Show mobile search bar and hide navbar search on small screens */
+@media (max-width: 768px) {
+  .search-container {
+    display: none !important;
+  }
+  .mobile-search-bar {
+    display: block;
+  }
+}

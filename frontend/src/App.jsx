@@ -22,6 +22,7 @@ const App = () => {
   const [user, setUser] = useState(null)
   const [name, setName] = useState('')
   const[showSignup, setShowSignup] = useState(false)
+  const [searchTerm, setSearchTerm] = useState('')
 
   const blogFormRef = useRef()
 
@@ -262,7 +263,20 @@ const App = () => {
         handleLogout={handleLogout}
         onCreateNew={() => blogFormRef.current.toggleVisibility()}
         isBlogFormVisible={isBlogFormVisible}
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
       />
+
+      {/* Mobile search bar: only visible on small screens */}
+      <div className="mobile-search-bar">
+        <input
+          type="text"
+          placeholder="Search blogs..."
+          value={searchTerm}
+          onChange={e => setSearchTerm(e.target.value)}
+          className="search-input"
+        />
+      </div>
 
       <Notification message={errorMessage} type={notificationType} />
 
