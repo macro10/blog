@@ -847,8 +847,7 @@ input[type="url"]:focus {
 .mobile-search-bar {
   display: none;
   padding: 1rem var(--standard-padding) 0 var(--standard-padding);
-  background: white;
-  border-bottom: var(--border-style);
+  background: transparent;
   z-index: 999;
   position: relative;
 }
