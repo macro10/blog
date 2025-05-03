@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 
-const Blog = ({ blog, updateBlog, deleteBlog, user }) => {
+const Blog = ({ blog, updateBlog, deleteBlog, user, setSearchTerm }) => {
   const [visible, setVisible] = useState(false)
 
   const toggleVisibility = () => {
@@ -68,7 +68,19 @@ const Blog = ({ blog, updateBlog, deleteBlog, user }) => {
     const words = content.split(/(\s+)/)
     return words.map((word, index) => {
       if (word.startsWith('#')) {
-        return <span key={index} className="hashtag">{word}</span>
+        return (
+          <span
+            key={index}
+            className="hashtag"
+            style={{ cursor: 'pointer' }}
+            onClick={e => {
+              e.stopPropagation()
+              setSearchTerm(word)
+            }}
+          >
+            {word}
+          </span>
+        )
       }
       return word
     })

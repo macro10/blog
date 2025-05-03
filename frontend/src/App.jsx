@@ -339,6 +339,7 @@ const App = () => {
               updateBlog={updateBlog}
               deleteBlog={deleteBlog}
               user={user}
+              setSearchTerm={setSearchTerm}
             />
           )
         )}
