@@ -198,6 +198,7 @@ h2 {
 .search-container {
   position: relative;
   width: 300px;
+  margin-right: 2rem;
 }
 
 .search-input {
@@ -208,6 +209,7 @@ h2 {
   background-color: var(--light-gray);
   transition: var(--transition);
   border-radius: var(--border-radius);
+  height: 44px;
 }
 
 .search-input:focus {
