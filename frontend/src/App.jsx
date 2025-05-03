@@ -218,10 +218,14 @@ const App = () => {
   const filteredBlogs = sortedBlogs.filter(blog => {
     if (!searchTerm.trim()) return true // Show all if search is empty
     const lowerSearch = searchTerm.toLowerCase()
-    // Check title first, then content
+    // Check title, then content, then user name/username
     return (
       blog.title.toLowerCase().includes(lowerSearch) ||
-      (blog.content && blog.content.toLowerCase().includes(lowerSearch))
+      (blog.content && blog.content.toLowerCase().includes(lowerSearch)) ||
+      (blog.user && (
+        (blog.user.name && blog.user.name.toLowerCase().includes(lowerSearch)) ||
+        (blog.user.username && blog.user.username.toLowerCase().includes(lowerSearch))
+      ))
     )
   })
 
