@@ -167,7 +167,8 @@ h2 {
   display: flex;
   align-items: center;
   gap: 2rem;
-  padding-left: 0;
+  flex: 1 1 0%;
+  min-width: 0;
 }
 
 .navbar-right {
@@ -186,6 +187,8 @@ h2 {
   padding: 0;
   background-color: white;
   transition: transform 0.2s ease;
+  position: relative;
+  top: -3px;
 }
 
 .logo:hover {
@@ -197,7 +200,10 @@ h2 {
    ==================== */
 .search-container {
   position: relative;
-  width: 300px;
+  flex: 1 1 0%;
+  width: auto;
+  margin-right: 2rem;
+  min-width: 0;
 }
 
 .search-input {
@@ -208,6 +214,7 @@ h2 {
   background-color: var(--light-gray);
   transition: var(--transition);
   border-radius: var(--border-radius);
+  height: 44px;
 }
 
 .search-input:focus {
@@ -756,6 +763,8 @@ input[type="url"]:focus {
     font-size: 3rem;
     transform: none;
     margin-bottom: 0.5rem;
+    position: relative;
+    top: 1.5px;
   }
   
   .navbar-spacer {
@@ -822,7 +831,7 @@ input[type="url"]:focus {
   
   /* Update spacing to match new navbar height */
   .navbar-spacing {
-    height: 140px;
+    height: 100px;
   }
   
   /* Blog title even smaller on mobile phones */
@@ -841,4 +850,24 @@ input[type="url"]:focus {
   margin: 0 0.3rem;
   opacity: 0.7;
   font-weight: bold;
+}
+
+/* Hide mobile search bar by default */
+.mobile-search-bar {
+  display: none;
+  padding: 1rem var(--standard-padding) 0 var(--standard-padding);
+  background: transparent;
+  z-index: 999;
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+/* Show mobile search bar and hide navbar search on small screens */
+@media (max-width: 768px) {
+  .search-container {
+    display: none !important;
+  }
+  .mobile-search-bar {
+    display: block;
+  }
 }
