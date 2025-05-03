@@ -186,6 +186,8 @@ h2 {
   padding: 0;
   background-color: white;
   transition: transform 0.2s ease;
+  position: relative;
+  top: -3px;
 }
 
 .logo:hover {
@@ -758,6 +760,8 @@ input[type="url"]:focus {
     font-size: 3rem;
     transform: none;
     margin-bottom: 0.5rem;
+    position: relative;
+    top: 1.5px;
   }
   
   .navbar-spacer {
@@ -824,7 +828,7 @@ input[type="url"]:focus {
   
   /* Update spacing to match new navbar height */
   .navbar-spacing {
-    height: 140px;
+    height: 100px;
   }
   
   /* Blog title even smaller on mobile phones */
@@ -852,6 +856,7 @@ input[type="url"]:focus {
   background: transparent;
   z-index: 999;
   position: relative;
+  margin-bottom: 1.5rem;
 }
 
 /* Show mobile search bar and hide navbar search on small screens */
