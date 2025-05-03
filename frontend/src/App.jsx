@@ -267,6 +267,8 @@ const App = () => {
         setSearchTerm={setSearchTerm}
       />
 
+      <Notification message={errorMessage} type={notificationType} />
+
       {/* Mobile search bar: only visible on small screens */}
       <div className="mobile-search-bar">
         <input
@@ -277,8 +279,6 @@ const App = () => {
           className="search-input"
         />
       </div>
-
-      <Notification message={errorMessage} type={notificationType} />
 
       <Togglable
         buttonLabel="Create new blog"
